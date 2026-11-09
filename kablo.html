@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TF-7500 Yükleme</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 24px; background: #000; color: #fff; max-width: 450px; margin: 0 auto; }
+  input { font-size: 26px; padding: 14px; width: 100%; border-radius: 14px; border: 1px solid #333; background: #1c1c1e; color: #fff; box-sizing: border-box; text-align: center; font-weight: bold; }
+  .res-box { margin-top: 24px; padding: 20px; background: #1c1c1e; border-radius: 14px; border: 1px solid #2c2c2e; }
+  .weight { font-size: 20px; font-weight: 700; color: #0a84ff; margin-bottom: 12px; }
+  .item { font-size: 18px; margin-bottom: 6px; color: #e5e5ea; }
+</style>
+</head>
+<body>
+  <h2 style="text-align:center;margin-bottom:20px;">TF-7500 Yükleme</h2>
+  <input type="number" step="any" id="target" placeholder="Hedef kg (örn: 18.2)" oninput="calc()" autofocus>
+  <div id="output" class="res-box" style="display:none;"></div>
+
+<script>
+const data = {"0.5":["1 adet 0,5 kg"],"1.0":["2 adet 0,5 kg"],"1.25":["1 adet 1,25 kg"],"1.75":["1 adet 1,25 kg","1 adet 0,5 kg"],"2.25":["1 adet 1,25 kg","2 adet 0,5 kg"],"2.5":["1 adet 2,5 kg"],"3.0":["1 adet 2,5 kg","1 adet 0,5 kg"],"3.5":["1 adet 2,5 kg","2 adet 0,5 kg"],"3.75":["1 adet 2,5 kg","1 adet 1,25 kg"],"4.25":["1 adet 2,5 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"4.75":["1 adet 2,5 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"5.0":["2 adet 2,5 kg"],"5.5":["2 adet 2,5 kg","1 adet 0,5 kg"],"6.0":["2 adet 2,5 kg","2 adet 0,5 kg"],"6.25":["2 adet 2,5 kg","1 adet 1,25 kg"],"6.75":["2 adet 2,5 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"7.25":["2 adet 2,5 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"7.5":["3 adet 2,5 kg"],"8.0":["3 adet 2,5 kg","1 adet 0,5 kg"],"8.5":["3 adet 2,5 kg","2 adet 0,5 kg"],"8.75":["3 adet 2,5 kg","1 adet 1,25 kg"],"9.25":["3 adet 2,5 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"9.75":["3 adet 2,5 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"10.0":["1 adet 10 kg"],"10.5":["1 adet 10 kg","1 adet 0,5 kg"],"11.0":["1 adet 10 kg","2 adet 0,5 kg"],"11.25":["1 adet 10 kg","1 adet 1,25 kg"],"11.75":["1 adet 10 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"12.25":["1 adet 10 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"12.5":["1 adet 10 kg","1 adet 2,5 kg"],"13.0":["1 adet 10 kg","1 adet 2,5 kg","1 adet 0,5 kg"],"13.5":["1 adet 10 kg","1 adet 2,5 kg","2 adet 0,5 kg"],"13.75":["1 adet 10 kg","1 adet 2,5 kg","1 adet 1,25 kg"],"14.25":["1 adet 10 kg","1 adet 2,5 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"14.75":["1 adet 10 kg","1 adet 2,5 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"15.0":["1 adet 10 kg","2 adet 2,5 kg"],"15.5":["1 adet 10 kg","2 adet 2,5 kg","1 adet 0,5 kg"],"16.0":["1 adet 10 kg","2 adet 2,5 kg","2 adet 0,5 kg"],"16.25":["1 adet 10 kg","2 adet 2,5 kg","1 adet 1,25 kg"],"16.75":["1 adet 10 kg","2 adet 2,5 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"17.25":["1 adet 10 kg","2 adet 2,5 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"17.5":["1 adet 10 kg","3 adet 2,5 kg"],"18.0":["1 adet 10 kg","3 adet 2,5 kg","1 adet 0,5 kg"],"18.5":["1 adet 10 kg","3 adet 2,5 kg","2 adet 0,5 kg"],"18.75":["1 adet 10 kg","3 adet 2,5 kg","1 adet 1,25 kg"],"19.25":["1 adet 10 kg","3 adet 2,5 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"19.75":["1 adet 10 kg","3 adet 2,5 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"20.0":["1 adet 20 kg"],"20.5":["1 adet 20 kg","1 adet 0,5 kg"],"21.0":["1 adet 20 kg","2 adet 0,5 kg"],"21.25":["1 adet 20 kg","1 adet 1,25 kg"],"21.75":["1 adet 20 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"22.25":["1 adet 20 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"22.5":["1 adet 20 kg","1 adet 2,5 kg"],"23.0":["1 adet 20 kg","1 adet 2,5 kg","1 adet 0,5 kg"],"23.5":["1 adet 20 kg","1 adet 2,5 kg","2 adet 0,5 kg"],"23.75":["1 adet 20 kg","1 adet 2,5 kg","1 adet 1,25 kg"],"24.25":["1 adet 20 kg","1 adet 2,5 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"24.75":["1 adet 20 kg","1 adet 2,5 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"25.0":["1 adet 20 kg","2 adet 2,5 kg"],"25.5":["1 adet 20 kg","2 adet 2,5 kg","1 adet 0,5 kg"],"26.0":["1 adet 20 kg","2 adet 2,5 kg","2 adet 0,5 kg"],"26.25":["1 adet 20 kg","2 adet 2,5 kg","1 adet 1,25 kg"],"26.75":["1 adet 20 kg","2 adet 2,5 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"27.25":["1 adet 20 kg","2 adet 2,5 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"27.5":["1 adet 20 kg","3 adet 2,5 kg"],"28.0":["1 adet 20 kg","3 adet 2,5 kg","1 adet 0,5 kg"],"28.5":["1 adet 20 kg","3 adet 2,5 kg","2 adet 0,5 kg"],"28.75":["1 adet 20 kg","3 adet 2,5 kg","1 adet 1,25 kg"],"29.25":["1 adet 20 kg","3 adet 2,5 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"29.75":["1 adet 20 kg","3 adet 2,5 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"30.0":["1 adet 20 kg","1 adet 10 kg"],"30.5":["1 adet 20 kg","1 adet 10 kg","1 adet 0,5 kg"],"31.0":["1 adet 20 kg","1 adet 10 kg","2 adet 0,5 kg"],"31.25":["1 adet 20 kg","1 adet 10 kg","1 adet 1,25 kg"],"31.75":["1 adet 20 kg","1 adet 10 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"32.25":["1 adet 20 kg","1 adet 10 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"32.5":["1 adet 20 kg","1 adet 10 kg","1 adet 2,5 kg"],"33.0":["1 adet 20 kg","1 adet 10 kg","1 adet 2,5 kg","1 adet 0,5 kg"],"33.5":["1 adet 20 kg","1 adet 10 kg","1 adet 2,5 kg","2 adet 0,5 kg"],"33.75":["1 adet 20 kg","1 adet 10 kg","1 adet 2,5 kg","1 adet 1,25 kg"],"34.25":["1 adet 20 kg","1 adet 10 kg","1 adet 2,5 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"34.75":["1 adet 20 kg","1 adet 10 kg","1 adet 2,5 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"35.0":["1 adet 20 kg","1 adet 10 kg","2 adet 2,5 kg"],"35.5":["1 adet 20 kg","1 adet 10 kg","2 adet 2,5 kg","1 adet 0,5 kg"],"36.0":["1 adet 20 kg","1 adet 10 kg","2 adet 2,5 kg","2 adet 0,5 kg"],"36.25":["1 adet 20 kg","1 adet 10 kg","2 adet 2,5 kg","1 adet 1,25 kg"],"36.75":["1 adet 20 kg","1 adet 10 kg","2 adet 2,5 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"37.25":["1 adet 20 kg","1 adet 10 kg","2 adet 2,5 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"37.5":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg"],"38.0":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","1 adet 0,5 kg"],"38.5":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","2 adet 0,5 kg"],"38.75":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","1 adet 1,25 kg"],"39.25":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","1 adet 1,25 kg","1 adet 0,5 kg"],"39.75":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","1 adet 1,25 kg","2 adet 0,5 kg"],"40.0":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","2 adet 1,25 kg"],"40.5":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","2 adet 1,25 kg","1 adet 0,5 kg"],"41.0":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","2 adet 1,25 kg","2 adet 0,5 kg"],"41.25":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","3 adet 1,25 kg"],"41.75":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","3 adet 1,25 kg","1 adet 0,5 kg"],"42.25":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","3 adet 1,25 kg","2 adet 0,5 kg"],"42.5":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","4 adet 1,25 kg"],"43.0":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","4 adet 1,25 kg","1 adet 0,5 kg"],"43.5":["1 adet 20 kg","1 adet 10 kg","3 adet 2,5 kg","4 adet 1,25 kg","2 adet 0,5 kg"]};
+
+function calc() {
+  const val = parseFloat(document.getElementById('target').value.replace(',', '.'));
+  if (isNaN(val)) { document.getElementById('output').style.display = 'none'; return; }
+  let closest = "0.5";
+  let minDiff = 9999;
+  for (let k in data) {
+    let diff = Math.abs(parseFloat(k) - val);
+    if (diff < minDiff) { minDiff = diff; closest = k; }
+  }
+  const out = document.getElementById('output');
+  out.style.display = 'block';
+  let html = `<div class="weight">Efektif ${closest.replace('.', ',')} kg için tek tarafa tak:</div>`;
+  data[closest].forEach(item => { html += `<div class="item">• ${item}</div>`; });
+  out.innerHTML = html;
+}
+</script>
+</body>
+</html>
